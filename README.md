@@ -5,8 +5,8 @@ Linux server on an Amazon Lightsail instance.
 The instructions below show how to create an instance on Amazon Lightsail, prepare it to host your application and including installing updates and securing it and other configuration needed to deploy it successfully.
 
 ## IP & Hostname
-IP: 18.185.16.5
-Hostname: ec2-18-185-16-5.eu-central-1.compute.amazonaws.com
+- IP: 18.185.16.5
+- Hostname: ec2-18-185-16-5.eu-central-1.compute.amazonaws.com
 
 
 ## Amazon Lightsail Setup
@@ -46,10 +46,10 @@ Run the following commands to update all currently installed packages
 5. Create a file to save the public key by the command `touch .ssh/authorized_keys`
 6. Open the file by the command `nano .ssh/authorized_keys` and past the copied content from lightSailKey.rsa.pub file.
 7. Change the permissions of the file and its folder by the commands 
-`
+```
 $ sudo chmod 700 /home/grader/.ssh
 $ sudo chmod 644 /home/grader/.ssh/authorized_keys
-`
+```
 8. Change the owner of the .ssh folder from root to grader by the command `sudo chown -R grader:grader /home/grader/.ssh`
 9. After these modifications on the server, we need to restart it by the command `$ sudo service ssh restart`
 10. Disconnect from the server by the command `~.`
@@ -90,7 +90,7 @@ Now if you put your public IP address in the browser, default Apache2 Ubuntu pag
 4. Move to the created catalog folder by the command `cd catalog`
 5. Clone your item catalog project by the command `git clone [YOUR PROJECT LINK FROM GITHUB] catalog`
 6. Create .wsgi file by the command `$ sudo nano catalog.wsgi` and put the following inside it
-`
+```
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
@@ -98,21 +98,21 @@ sys.path.insert(0, "/var/www/catalog/")
 
 from catalog import app as application
 application.secret_key = 'super_secret_key'
-`
+```
 7. Rename your project file to `__init__.py`, in my case I used the command `$ mv application.mv __init__.py`
 8. Install pip by the following command `sudo apt install python-pip`
 9. While you are inside `/var/www/catalog/`, create the virtual machine by the following commands
-`
+```
 $ sudo pip install virtualenv
 $ sudo virtualenv venv
 $ source venv/bin/activate
 $ sudo chmod -R 777 venv
-`
+```
 
 Now you will see your command line changed to `(venv) grader@ip[YOUR-PRIVATE-IP-ADDRESS]:/var/www/catalog$`
 
 ### Install Flask and Other Packages
-`
+```
 $ sudo pip install psycopg2-binary
 $ sudo pip install psycopg2
 $ sudo pip install Flask-SQLAlchemy
@@ -120,14 +120,14 @@ $ sudo pip install requests
 $ sudo pip install oauth2client
 $ sudo pip install flask
 $ sudo pip install httplib2 
-`
+```
 
 ### Modify client_secrets.json Path
 `nano __init__.py` and change `client_secrets.json` to `/var/www/catalog/catalog/client_secrets.json`
 
 ### Setup Server Configuration 
 1. Use the command `sudo nano /etc/apache2/sites-available/catalog.conf` and put the following inside it
-`
+```
 <VirtualHost *:80>
     ServerName [YOUR PUBLIC IP ADDRESS]
     ServerAlias [YOUR HOSTNAME]
@@ -148,20 +148,20 @@ $ sudo pip install httplib2
     LogLevel warn
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
-`
+```
 To get the hostname, you can use [this](https://whatismyipaddress.com/ip-hostname) link and paste your public IP address. 
 2. Enable the virtual host by the following command `$ sudo a2ensite catalog.conf`
 
 ### Set up the Database
-`
+```
 $ sudo apt-get install libpq-dev python-dev
 $ sudo apt-get install postgresql postgresql-contrib
 $ sudo su - postgres -i
 $ psql
-`
+```
 
 ### Create the Database
-`
+```
 CREATE USER catalog WITH PASSWORD 'PUT A PASSWORD';
 ALTER USER catalog CREATEDB;
 CREATE DATABASE catalog with OWNER catalog;
@@ -170,7 +170,7 @@ REVOKE ALL ON SCHEMA public FROM public;
 GRANT ALL ON SCHEMA public TO catalog;
 \q
 $ exit
-`
+```
 
 ### Modify Database Engine 
 nano to the following files `__init__.py`, `database_setup.py`, and `seeder.py` and 
