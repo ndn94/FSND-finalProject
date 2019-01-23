@@ -150,7 +150,7 @@ $ sudo pip install httplib2
 </VirtualHost>
 ```
 To get the hostname, you can use [this](https://whatismyipaddress.com/ip-hostname) link and paste your public IP address. 
-2. Enable the virtual host by the following command `$ sudo a2ensite catalog.conf`
+- 2. Enable the virtual host by the following command `$ sudo a2ensite catalog.conf`
 
 ### Set up the Database
 ```
