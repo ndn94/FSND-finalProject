@@ -179,9 +179,9 @@ change `sqlite://catalog.db` to `'postgresql://catalog:YOUR-PASSWORD@localhost/c
 Restart your apache server by the following command `$ sudo service apache2 restart` 
 
 
-## FINALY! 
+## Finally! 
 Open a web page and put your ip address, your item catalog web application should be loaded...
 
 ## References 
-[https://github.com/mulligan121/Udacity-Linux-Configuration](https://github.com/mulligan121/Udacity-Linux-Configuration)
-[https://github.com/yiyupan/Linux-Server-Configuration-Udacity-Full-Stack-Nanodegree-Project](https://github.com/yiyupan/Linux-Server-Configuration-Udacity-Full-Stack-Nanodegree-Project)
+- [https://github.com/mulligan121/Udacity-Linux-Configuration](https://github.com/mulligan121/Udacity-Linux-Configuration)
+- [https://github.com/yiyupan/Linux-Server-Configuration-Udacity-Full-Stack-Nanodegree-Project](https://github.com/yiyupan/Linux-Server-Configuration-Udacity-Full-Stack-Nanodegree-Project)
